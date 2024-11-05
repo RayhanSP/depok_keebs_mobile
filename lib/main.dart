@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mental_health_tracker/menu.dart';
-
+import 'package:depok_keebs/menu.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -30,12 +29,27 @@ class MyApp extends StatelessWidget {
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
          colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.deepPurple,
-          ).copyWith(secondary: Colors.deepPurple[400]),
+          primarySwatch: MaterialColor(
+            0xFF222831,
+            <int, Color>{
+              50: Color(0xFFE0E0E0),
+              100: Color(0xFFB3B3B3),
+              200: Color(0xFF808080),
+              300: Color(0xFF4D4D4D),
+              400: Color(0xFF262626),
+              500: Color(0xFF222831), // primary color
+              600: Color(0xFF1E232D),
+              700: Color(0xFF191D23),
+              800: Color(0xFF14171A),
+              900: Color(0xFF0A0C0E),
+            },
+          ),
+        ).copyWith(
+          secondary: Color(0xFF00ADB5),
+        ),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: MyHomePage(),
     );
   }
 }
-
