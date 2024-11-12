@@ -195,7 +195,7 @@ Untuk mengatur tema dalam aplikasi Flutter agar tampilannya konsisten, saya meng
 Pada aplikasi yang saya buat, tema sudah diimplementasikan dengan baik. Penggunaan `Theme.of(context).colorScheme` pada widget tertentu, seperti `AppBar` dan `DrawerHeader`, juga memanfaatkan tema ini untuk tampilan yang konsisten. Selain itu, dengan mengaktifkan `useMaterial3: true`, aplikasi memanfaatkan elemen desain Material 3, memberikan kesan modern dan lebih rapi pada antarmuka.
 
 
-## **Pertanyaan 4**  
+## **Pertanyaan 5**  
 **Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter:**
 
 Untuk menangani navigasi dalam aplikasi Flutter dengan banyak halaman, saya menggunakan `Navigator` dan `MaterialPageRoute`. `Navigator` memungkinkan untuk berpindah halaman dengan metode `push` (menambahkan halaman baru di atas stack) dan `pop` (kembali ke halaman sebelumnya). Setiap halaman ditangani dengan `MaterialPageRout`e, yang menentukan rute baru ketika kita berpindah ke halaman tertentu.
