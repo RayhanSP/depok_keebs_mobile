@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:depok_keebs/menu.dart';
+import 'package:depok_keebs/screens/menu.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-         colorScheme: ColorScheme.fromSwatch(
+        colorScheme: ColorScheme.fromSwatch(
           primarySwatch: MaterialColor(
             0xFF222831,
             <int, Color>{
