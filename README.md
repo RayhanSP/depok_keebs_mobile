@@ -135,3 +135,72 @@ const: Nilai ditentukan saat kompilasi dan tidak bisa berubah selamanya. Digunak
 final: Nilai ditentukan saat runtime dan tidak bisa diubah setelah pertama kali diinisialisasi. Cocok untuk nilai yang tidak diketahui saat kompilasi tetapi tetap setelah di-set. Contoh: `final date = DateTime.now();`
 
 </details>
+
+<details>
+<summary> <b> Tugas 8: Flutter Navigation, Layouts, Forms, and Input Elements </b> </summary>
+
+
+## **Pertanyaan 1**  
+**Apa kegunaan `const` di Flutter? Jelaskan apa keuntungan ketika menggunakan `const` pada kode Flutter. Kapan sebaiknya kita menggunakan `const`, dan kapan sebaiknya tidak digunakan:**
+
+`const` di Flutter digunakan untuk membuat objek yang tidak berubah (immutable) dan sudah diketahui nilainya saat kompilasi. Keuntungan memakai `const` adalah aplikasi jadi lebih efisien karena objek tidak perlu dibuat ulang saat rebuild, sehingga menghemat memori dan meningkatkan performa. `const` sebaiknya digunakan untuk widget atau nilai tetap, tapi hindari saat data berubah secara dinamis.
+
+
+## **Pertanyaan 2**  
+**Jelaskan dan bandingkan penggunaan Column dan Row pada Flutter. Berikan contoh implementasi dari masing-masing layout widget ini:**
+
+`Column` dan `Row` adalah widget layout di Flutter yang digunakan untuk menyusun widget secara vertikal (ke bawah) dan horizontal (ke samping). Column cocok dipakai saat ingin menampilkan elemen-elemen secara bertumpuk ke bawah, misalnya teks dan ikon dalam `ItemCard`. Pada `Column`, properti seperti `mainAxisAlignment` dan `crossAxisAlignment` digunakan untuk mengatur posisi widget di sepanjang sumbu vertikal dan horizontal.
+
+Sementara itu, `Row` digunakan untuk menyusun widget secara horizontal, ideal untuk menampilkan elemen-elemen yang perlu disejajarkan ke samping, seperti ikon dan teks dalam satu baris. Properti `mainAxisAlignment` dan `crossAxisAlignment` pada `Row` berfungsi untuk mengatur tata letak widget di sepanjang sumbu horizontal dan vertikal.
+
+Contoh `Column` yang ada di `product_card.dart`:
+```dart
+    Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(Icons.keyboard, size: 50, color: Colors.blue),
+        Text("Depok Keebs"),
+      ],
+    )
+```
+Contoh `Row`:
+```dart
+Row(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+    Icon(Icons.add, color: Colors.blue),
+    Text("Tambah Produk"),
+  ],
+)
+```
+
+
+## **Pertanyaan 3**  
+**Sebutkan apa saja elemen input yang kamu gunakan pada halaman form yang kamu buat pada tugas kali ini. Apakah terdapat elemen input Flutter lain yang tidak kamu gunakan pada tugas ini? Jelaskan:**
+
+`TextFormField` - digunakan untuk input nama produk, deskripsi, dan jumlah produk. Masing-masing `TextFormField` memiliki validator untuk memastikan data diisi dengan benar, seperti memastikan nama dan deskripsi tidak kosong serta jumlah produk adalah angka positif.
+Ada beberapa elemen input di Flutter yang tidak digunakan dalam tugas ini, di antaranya:
+-`Checkbox` - untuk input yang membutuhkan pilihan ya/tidak.
+-`Switch` - alternatif lain untuk pilihan ya/tidak yang lebih modern.
+-`Radio` - untuk pilihan tunggal dari beberapa opsi.
+-`DropdownButton` - untuk memilih satu nilai dari daftar opsi.
+-`Slider` - untuk memilih nilai dalam rentang tertentu, cocok untuk input kuantitatif yang lebih intuitif.
+
+
+## **Pertanyaan 4**  
+**Bagaimana cara kamu mengatur tema (theme) dalam aplikasi Flutter agar aplikasi yang dibuat konsisten? Apakah kamu mengimplementasikan tema pada aplikasi yang kamu buat?:**
+
+Untuk mengatur tema dalam aplikasi Flutter agar tampilannya konsisten, saya menggunakan `ThemeData` pada `MaterialApp` untuk menetapkan gaya global. Di sini, saya mendefinisikan `colorScheme` menggunakan `ColorScheme.fromSwatch`, termasuk warna utama (`primarySwatch`) dengan beberapa shade dan warna sekunder (`secondary`). Pengaturan ini memastikan warna aplikasi seragam di seluruh widget tanpa perlu mengatur warna secara manual pada setiap elemen.
+
+Pada aplikasi yang saya buat, tema sudah diimplementasikan dengan baik. Penggunaan `Theme.of(context).colorScheme` pada widget tertentu, seperti `AppBar` dan `DrawerHeader`, juga memanfaatkan tema ini untuk tampilan yang konsisten. Selain itu, dengan mengaktifkan `useMaterial3: true`, aplikasi memanfaatkan elemen desain Material 3, memberikan kesan modern dan lebih rapi pada antarmuka.
+
+
+## **Pertanyaan 4**  
+**Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter:**
+
+Untuk menangani navigasi dalam aplikasi Flutter dengan banyak halaman, saya menggunakan `Navigator` dan `MaterialPageRoute`. `Navigator` memungkinkan untuk berpindah halaman dengan metode `push` (menambahkan halaman baru di atas stack) dan `pop` (kembali ke halaman sebelumnya). Setiap halaman ditangani dengan `MaterialPageRout`e, yang menentukan rute baru ketika kita berpindah ke halaman tertentu.
+
+Jika aplikasi memiliki struktur rute yang lebih kompleks, saya juga dapat mendefinisikan rute di dalam `MaterialApp` dengan properti `routes`. Dengan ini, setiap halaman memiliki nama unik yang bisa dipanggil kapan saja menggunakan `Navigator.pushNamed` atau `Navigator.pop`. Untuk aplikasi besar dengan banyak halaman, kita bisa mempertimbangkan menggunakan package seperti `flutter_modular` atau `go_router` untuk manajemen navigasi yang lebih terstruktur dan dinamis.
+
+</details>
+
