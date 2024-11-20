@@ -204,3 +204,66 @@ Jika aplikasi memiliki struktur rute yang lebih kompleks, saya juga dapat mendef
 
 </details>
 
+<details>
+<summary> <b> Tugas 9: Integrasi Layanan Web Django dengan Aplikasi Flutter </b> </summary>
+
+
+## **Pertanyaan 1**  
+**Step-by-step implementasi checklist Tugas 9:**
+
+1. Saya menjalankan `python manage.py runserver` di direktori proyek Django untuk memastikan proyek Django saya masih berjalan dengan lancar
+2. Untuk mengimplementasi fitur registrasi, saya membuat `register.dart` di direktori flutter `lib/screens/`. Saya memakai TextFormField sebagai wadah input text seperti username dan password
+3. Sama halnya dengan register, saya membuat `login.dart` di direktori flutter `lib/screens/`.
+4. Kemudian, di direktori proyek Django saya menjalankan `pip install django-cors-headers` untuk menginstall library yang dibutuhkan, kemudian menambahkan `corsheaders` ke `INSTALLED_APPS` di `settings.py` direktori proyek Django dan menambahkan beberapa variabel.
+5. Saya membuat app baru di proyek Django bernama `authentication` dengan path url master `localhost:8000/auth/` yang nantinya akan terintegrasi dengan sistem autentikasi pada Flutter
+6. Implementasi fungsi register, login, dan logout di views `authentication` kemudian routing URL nya
+7. Kemudian di direktori proyek Flutter, saya menginstall `provider` dan `pbp_django_auth` sebagai perantara kontak dengan web service Django.
+8. Implementasikan `CookieRequest` ke `main.dart`.
+9. Berkas `register.dart` dan `login.dart` yang tadi telah dibuat sekarang akan dihubungkan dengan `postJson` untuk register ke URL web Django yang terkait.
+10. Untuk membuat model kustom, saya menggunakan QuickType untuk mengubah JSON yang saya dapat di endpoint `/json` pada web Django saya menjadi suatu model kustom dart.
+11. Model ini saya namai `Product` dan saya letakkan di `lib/models/`.
+12. Untuk membuat halaman yang menampilkan seluruh produk yang ada, saya membuat `list_product.dart` di `lib/screens/` yang akan menampilkan seluruh produk yang telah difetch berdasarkan usernya. Saya hanya menampilkan 3 attribute yaitu `name`, `price`, dan `description` di landing page halaman list produk ini.
+13. Untuk membuat halaman detail yang menampilkan attribute lengkap dari produk, saya membuat `product_detail.dart` di `lib/widgets/`.
+14. Untuk mengimplementasikan halaman detail, tambahkan navigasi ke halaman list produk dengan `Navigator.push` di `onTap` pada `ItemCard` untuk "Lihat Daftar Produk." Kemudian, pada halaman list produk, bungkus setiap item dalam `GestureDetector` yang memanggil `Navigator.pus`h ke halaman detail produk sambil mengirim data produk. Di halaman detail produk, tampilkan semua atribut produk dari model dengan widget seperti `Text` dan tambahkan tombol "Kembali" menggunakan `Navigator.pop` untuk kembali ke daftar produk.
+
+
+## **Pertanyaan 2**  
+**Jelaskan mengapa kita perlu membuat model untuk melakukan pengambilan ataupun pengiriman data JSON? Apakah akan terjadi error jika kita tidak membuat model terlebih dahulu:**
+
+Membuat model untuk pengambilan atau pengiriman data JSON penting karena model bertindak sebagai representasi terstruktur dari data yang digunakan dalam aplikasi. Model memberikan konsistensi, sehingga data yang diterima dari JSON atau dikirim ke server dapat diakses dan dimanipulasi dengan cara yang lebih terorganisir dan mudah dipahami. Selain itu, model memungkinkan kita untuk memvalidasi data agar sesuai dengan format dan tipe yang diharapkan, seperti memastikan harga berupa angka atau nama produk tidak kosong, sehingga mencegah error yang mungkin terjadi akibat data yang tidak sesuai.
+
+Jika kita tidak membuat model terlebih dahulu, aplikasi mungkin tetap dapat berfungsi, tetapi akan lebih sulit untuk mengelola dan memanipulasi data. Sebagai contoh, tanpa model, data hanya tersedia dalam bentuk map atau objek mentah yang rentan terhadap kesalahan akses (e.g., salah pengetikan key). Selain itu, proses debugging menjadi lebih sulit karena tidak ada struktur yang jelas untuk memeriksa data yang diterima atau dikirim. Dengan model, kita juga bisa memastikan kompatibilitas antara data frontend dan backend, membuat pengembangan lebih efisien dan mudah dipelihara.
+
+
+## **Pertanyaan 3**  
+**Jelaskan fungsi dari library http yang sudah kamu implementasikan pada tugas ini:**
+
+Library http dalam tugas ini berfungsi sebagai alat untuk melakukan komunikasi antara aplikasi Flutter dengan backend melalui protokol HTTP. Library ini memungkinkan aplikasi untuk mengirimkan permintaan (requests) seperti GET, POST, PUT, atau DELETE ke server, serta menerima respon berupa data, yang biasanya berformat JSON, untuk diolah lebih lanjut dalam aplikasi.
+
+Dalam tugas ini, http digunakan untuk mengambil data produk dari server (menggunakan metode GET), sehingga aplikasi dapat menampilkan daftar produk secara dinamis berdasarkan data yang ada di backend. Selain itu, library ini juga digunakan untuk mengirim data (seperti menambah produk baru melalui metode POST), sehingga aplikasi dapat berinteraksi dengan server untuk memperbarui atau mengubah data. Dengan kata lain, library http menjadi jembatan utama yang memungkinkan integrasi antara aplikasi Flutter dan sistem backend.
+
+
+## **Pertanyaan 4**  
+**Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter:**
+
+CookieRequest adalah sebuah kelas yang digunakan untuk mengelola sesi dan autentikasi berbasis cookie di aplikasi Flutter, khususnya saat berinteraksi dengan backend. Fungsinya mencakup pengiriman HTTP request (seperti GET dan POST) sambil menyimpan dan menyertakan cookie yang diterima dari server pada setiap permintaan. Cookie ini digunakan untuk menjaga status sesi pengguna (misalnya, login tetap aktif) dan memberikan otorisasi pada endpoint yang memerlukan autentikasi.
+Perlu dibagikan ke semua komponen di aplikasi karena sesi pengguna sering kali digunakan secara global di seluruh aplikasi, seperti untuk memastikan bahwa permintaan ke API memiliki autentikasi yang valid. Dengan membagikan instance yang sama, aplikasi dapat mempertahankan status sesi yang konsisten tanpa perlu menginisialisasi ulang atau kehilangan data cookie di antara komponen. Hal ini juga memudahkan akses ke fungsi-fungsi seperti login, logout, atau pengiriman data dengan autentikasi, sehingga meningkatkan efisiensi dan kepraktisan dalam pengelolaan state aplikasi.
+
+
+## **Pertanyaan 5**  
+**Jelaskan mekanisme pengiriman data mulai dari input hingga dapat ditampilkan pada Flutter:**
+
+Pengguna memasukkan data melalui widget input, yang disimpan dalam state. Data dikirim ke backend menggunakan HTTP (POST/PUT), lalu backend memproses dan menyimpannya di database. Aplikasi mengambil data kembali dari backend (GET), mengubahnya menjadi model, dan menampilkannya di UI Flutter.
+
+
+## **Pertanyaan 6**  
+**Jelaskan mekanisme autentikasi dari login, register, hingga logout. Mulai dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter:**
+
+Login : Pengguna memasukkan username dan password, data dikirim ke backend Django melalui CookieRequest. Backend memverifikasi kredensial; jika valid, cookie sesi dikembalikan. Flutter menampilkan pesan sukses dan mengarahkan ke MyHomePage, atau menampilkan dialog error jika gagal. Pengguna juga dapat pindah ke halaman registrasi melalui tautan.
+
+Register : Pengguna mengisi username, password, dan confirm password di form. Data dikirim ke backend Django melalui postJson. Django memvalidasi data (username unik, password sesuai) dan menyimpannya jika valid. Jika berhasil, Flutter menampilkan pesan sukses dan mengarahkan ke halaman login; jika gagal, menampilkan pesan error.
+
+Logout : Flutter mengirim request ke backend Django melalui request.logout dengan URL endpoint /auth/logout/. Backend memproses permintaan dan menghapus sesi autentikasi. Jika logout berhasil, Flutter menampilkan pesan sukses menggunakan SnackBar dan mengarahkan pengguna kembali ke halaman login. Jika gagal, pesan error ditampilkan melalui SnackBar.
+
+
+</details>
